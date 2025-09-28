@@ -1,5 +1,9 @@
-package com.github.glo2003.payroll;
+package com.github.glo2003.service;
 
+import com.github.glo2003.domain.employee.Employee;
+import com.github.glo2003.domain.employee.HourlyEmployee;
+import com.github.glo2003.domain.paycheck.Paycheck;
+import com.github.glo2003.domain.employee.SalariedEmployee;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,7 +53,7 @@ class CompanyPayrollTest {
         company.createPending();
 
         Paycheck paycheck = company.getPendings().get(0);
-        assertThat(paycheck.getTo()).isEqualTo(HOURLY_NAME);
+        assertThat(paycheck.getEmployeeName()).isEqualTo(HOURLY_NAME);
         assertThat(paycheck.getAmount()).isEqualTo(HOURLY_RATE * HOURLY_AMOUNT);
     }
 
@@ -60,7 +64,7 @@ class CompanyPayrollTest {
         company.createPending();
 
         Paycheck paycheck = company.getPendings().get(0);
-        assertThat(paycheck.getTo()).isEqualTo(SALARIED_NAME);
+        assertThat(paycheck.getEmployeeName()).isEqualTo(SALARIED_NAME);
         assertThat(paycheck.getAmount()).isEqualTo(BIWEEKLY_AMOUNT);
     }
 

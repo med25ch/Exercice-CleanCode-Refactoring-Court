@@ -1,9 +1,9 @@
 package com.github.glo2003;
 
-import com.github.glo2003.payroll.CompanyPayroll;
-import com.github.glo2003.payroll.Employee;
-import com.github.glo2003.payroll.HourlyEmployee;
-import com.github.glo2003.payroll.SalariedEmployee;
+import com.github.glo2003.service.CompanyPayroll;
+import com.github.glo2003.domain.employee.Employee;
+import com.github.glo2003.domain.employee.HourlyEmployee;
+import com.github.glo2003.domain.employee.SalariedEmployee;
 
 public class Main {
 
