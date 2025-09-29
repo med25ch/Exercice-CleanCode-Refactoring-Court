@@ -2,6 +2,7 @@ package com.github.glo2003.service;
 
 import com.github.glo2003.domain.employee.Employee;
 import com.github.glo2003.domain.employee.HourlyEmployee;
+import com.github.glo2003.domain.employee.Role;
 import com.github.glo2003.domain.paycheck.Paycheck;
 import com.github.glo2003.domain.employee.SalariedEmployee;
 import org.junit.Assert;
@@ -35,15 +36,15 @@ class CompanyPayrollTest {
     @BeforeEach
     void setUp() {
         company = new CompanyPayroll();
-        vp = new HourlyEmployee("Alice", "vp", 25, 100, 35.5f * 2);
-        eng = new SalariedEmployee("Bob", "engineer", 4, 1500);
-        manager = new SalariedEmployee("Charlie", "manager", 10, 2000);
-        intern1 = new HourlyEmployee("Ernest", "intern", 10, 5, 50 * 2);
-        intern2 = new HourlyEmployee("Fred", "intern", 10, 5, 50 * 2);
+        vp = new HourlyEmployee("Alice", Role.VP, 25, 100, 35.5f * 2);
+        eng = new SalariedEmployee("Bob", Role.ENGINEER, 4, 1500);
+        manager = new SalariedEmployee("Charlie", Role.MANAGER, 10, 2000);
+        intern1 = new HourlyEmployee("Ernest", Role.INTERN, 10, 5, 50 * 2);
+        intern2 = new HourlyEmployee("Fred", Role.INTERN, 10, 5, 50 * 2);
 
-        hourlyEmployee = new HourlyEmployee(HOURLY_NAME, "engineer", VACATION_DAYS, HOURLY_RATE, HOURLY_AMOUNT);
-        salariedEmployee = new SalariedEmployee(SALARIED_NAME, "engineer", VACATION_DAYS, BIWEEKLY_AMOUNT);
-        anotherSalariedEmployee = new SalariedEmployee("Yan", "manager", VACATION_DAYS, ANOTHER_MONTHLY_AMOUNT);
+        hourlyEmployee = new HourlyEmployee(HOURLY_NAME, Role.ENGINEER, VACATION_DAYS, HOURLY_RATE, HOURLY_AMOUNT);
+        salariedEmployee = new SalariedEmployee(SALARIED_NAME, Role.ENGINEER, VACATION_DAYS, BIWEEKLY_AMOUNT);
+        anotherSalariedEmployee = new SalariedEmployee("Yan", Role.MANAGER, VACATION_DAYS, ANOTHER_MONTHLY_AMOUNT);
     }
 
     @Test
@@ -86,7 +87,7 @@ class CompanyPayrollTest {
     void findSWE_shouldReturnSoftwareEngineers() {
         company.addEmp(eng);
 
-        List<Employee> es = company.findSWE();
+        List<Employee> es = company.findEmployeesByRole(Role.ENGINEER);
         assertThat(es).containsExactly(eng);
     }
 
@@ -94,7 +95,7 @@ class CompanyPayrollTest {
     void findMgs_shouldReturnManagers() {
         company.addEmp(manager);
 
-        List<Employee> es = company.findMgs();
+        List<Employee> es = company.findEmployeesByRole(Role.MANAGER);
         assertThat(es).containsExactly(manager);
     }
 
@@ -102,7 +103,7 @@ class CompanyPayrollTest {
     void find_Vice_Presidents_shouldReturnVicePresidents() {
         company.addEmp(vp);
 
-        List<Employee> es = company.find_Vice_Presidents();
+        List<Employee> es = company.findEmployeesByRole(Role.VP);
         assertThat(es).containsExactly(vp);
     }
 
@@ -111,7 +112,7 @@ class CompanyPayrollTest {
         company.addEmp(intern1);
         company.addEmp(intern2);
 
-        List<Employee> es = company.find_interns();
+        List<Employee> es = company.findEmployeesByRole(Role.INTERN);
         assertThat(es).containsExactly(intern1, intern2);
     }
 

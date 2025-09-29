@@ -1,13 +1,15 @@
 package com.github.glo2003.domain.employee;
 
 
+import com.github.glo2003.domain.paycheck.Paycheck;
+
 public abstract class Employee {
     private final String name;
-    private final String role;
+    private final Role role;
     private int vacationDays;
     private boolean isInVacation;
 
-    public Employee(String name, String role, int vacation_days) {
+    public Employee(String name, Role role, int vacation_days) {
         this.name = name;
         this.role = role;
         this.isInVacation = false;
@@ -18,7 +20,7 @@ public abstract class Employee {
         return name;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
@@ -37,6 +39,9 @@ public abstract class Employee {
     public void setVacationDays(int vacation_days) {
         this.vacationDays = vacation_days;
     }
+
+    public abstract Paycheck createPaycheck();
+    public abstract void setPayRise(float rise);
 
     @Override
     public String toString() {

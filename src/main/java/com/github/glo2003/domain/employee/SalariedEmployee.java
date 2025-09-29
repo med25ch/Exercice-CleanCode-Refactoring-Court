@@ -1,9 +1,11 @@
 package com.github.glo2003.domain.employee;
 
+import com.github.glo2003.domain.paycheck.Paycheck;
+
 public class SalariedEmployee extends Employee {
     private float biweekly;
 
-    public SalariedEmployee(String name, String role, int vacation_days, float biweekly) {
+    public SalariedEmployee(String name, Role role, int vacation_days, float biweekly) {
         super(name, role, vacation_days);
         this.biweekly = biweekly;
     }
@@ -14,6 +16,16 @@ public class SalariedEmployee extends Employee {
 
     public void setBiweekly(float biweekly) {
         this.biweekly = biweekly;
+    }
+
+    @Override
+    public Paycheck createPaycheck() {
+        return new Paycheck(getName(), this.biweekly);
+    }
+
+    @Override
+    public void setPayRise(float raise) {
+        setBiweekly(this.biweekly + raise);
     }
 
     @Override
